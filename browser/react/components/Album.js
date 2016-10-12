@@ -3,7 +3,7 @@
 import React from 'react';
 import Songs from '../components/Songs';
 
-export default ({ album, currentSong, isPlaying, toggle }) => (
+export default ({ album}) => (
   <div className="album">
     <div>
       <h3>{ album.name }</h3>
@@ -11,8 +11,5 @@ export default ({ album, currentSong, isPlaying, toggle }) => (
     </div>
     <Songs 
       songs={album.songs}
-      currentSong={currentSong} 
-      isPlaying={isPlaying} 
-      toggle={toggle} />
   </div>
 );

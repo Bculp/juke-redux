@@ -9,7 +9,7 @@ import Sidebar from '../components/Sidebar';
 import Album from '../components/Album';
 import Player from '../components/Player';
 
-import AlbumsContainer from '../Redux/AlbumsContainer';
+import AlbumsContainer from '../Redux/Containers/AlbumsContainer';
 
 const convertSong = song => {
   song.audioUrl = `/api/songs/${song.id}/audio`;

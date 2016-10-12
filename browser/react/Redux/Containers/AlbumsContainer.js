@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import Albums from './Albums.js';
-import store from './storeContainer';
-import { GET_ALL_ALBUMS } from './storeContainer';
+import Albums from '../Albums.js';
+import store from '../storeContainer';
+import { GET_ALL_ALBUMS , GET_ALBUM} from '../storeContainer';
 
 
 const mapStateToProps = ({ allAlbums }) => ({
@@ -10,13 +10,18 @@ const mapStateToProps = ({ allAlbums }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchAlbumsFromServer: () => dispatch(fetchAlbumsFromServer())
+  selectAlbum: () => dispatch()
 })
 
 //sync action creator
-export const getAllAlbumsDispatcher = (arrayAlbums) => ({
+const getAllAlbumsDispatcher = (arrayAlbums) => ({
   type: GET_ALL_ALBUMS,
   albums: arrayAlbums
 })
+
+const getAlbum = (id) =>  
+
+
 
 //utility fn
 const convertSong = song => {
@@ -29,6 +34,7 @@ const convertAlbum = album => {
   album.songs = album.songs.map(convertSong);
   return album;
 };
+
 //async getting albums
 const fetchAlbumsFromServer = () => {
   return dispatch => {
