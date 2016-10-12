@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <Provider store={store}>
-  	<AppContainer />,
-  document.getElementById('app')
-  </Provider>
+  	<AppContainer />
+  </Provider>, document.getElementById('app')
 );

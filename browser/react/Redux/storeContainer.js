@@ -2,10 +2,12 @@
 
 
 
-import {createStore} from 'redux';
+import {createStore, combineReducers, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger';
+import thunkMiddleWare from 'redux-thunk';
 
-const initialState = {
-  albums: [],
+export const initialState = {
+  allAlbums: [],
   album: {}, // the album we want to use
   currentSong: 0, // the id of the current song playing (0 if no song playing)
   currentSongList: [], // array of songs queued up to play
@@ -20,22 +22,28 @@ const PAUSE_SONG = "PAUSE_SONG";
 const NEXT_SONG = "NEXT_SONG";
 const PREVIOUS_SONG= "PREVIOUS_SONG";
 const GET_ALBUM = "GET_ALBUM";   // from server
-const GET_ALL_ALBUMS= "GET_ALL_ALBUMS";
+export const GET_ALL_ALBUMS= "GET_ALL_ALBUMS";
 
 
+const middleWare = applyMiddleware(createLogger(), thunkMiddleWare)
 
-var reducer = (state = initialState ,action) =>{
+var albumReducer = (state = [],action) =>{
     switch (action.type) {
       case GET_ALL_ALBUMS:
-      return Object.assign({},state,{albums:action.albums}) ;
+      return [...action.albums] ;
       default: return state;
     }
 };
 
-let store = createStore(reducer,initialState);
+const reducers = combineReducers({
+ allAlbums : albumReducer
+})
 
-console.log(store.getState());
-store.dispatch({type:'GET_ALL_ALBUMS', albums: "SONGGG"});
-console.log(store.getState());
+
+let store = createStore(reducers,middleWare);
+
+// store.getState();
+// store.dispatch({type:'GET_ALL_ALBUMS', albums: "SONGGG"});
+// // console.log(store.getState());
 
 export default store;
